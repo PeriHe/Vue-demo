@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,
+			ul,
+			li,
+			h2 {
+				margin: 0;
+				padding: 0;
+			}
+			li {
+				list-style: none;
+			}
+			.list>div {
+				margin-bottom: 10px;
+			}
+			.list .show {
+				display: block;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="./css/qq.css" />
+		<script src="vue.js"></script>
+	</head>
+	<body onselectstart="return false;">
+		<div class="wrap" id="app">
+			<div class="list">
+				<div 
+				v-for="item,index in dataList"
+				@click="showHander(index)"
+				>
+					<h2 :class="{active: i === index}"><span></span>{{item.title}}</h2>
+					<ul :class="{show: i === index}">
+						<li v-for="option in item.list">{{option}}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script>
+			let dataList = [
+				{
+					title: '我的好友',
+					list: ['呆瓜','沫沫','peri小仙女']
+				},
+				{
+					title: '企业好友',
+					list: ['习近平','普京','奥巴马']
+				},
+				{
+					title: '黑名单',
+					list: ['安倍','杜特尔特']
+				}
+			]
+			let vm = new Vue({
+				el: '#app',
+				data: {
+					dataList,
+					i:''
+				},
+				methods: {
+					showHander(index) {
+						this.i = this.i === index ? '' : index;
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>
